@@ -19,7 +19,10 @@ bool mailcore::checkCertificate(mailstream * stream, String * hostname)
 {
 #if __APPLE__
     bool result = false;
+    const char16_t * yahooConstString = u"yahoo";
     CFStringRef hostnameCFString;
+    CFStringRef yahooString;
+    CFRange range;
     SecPolicyRef policy;
     CFMutableArrayRef certificates;
     SecTrustRef trust = NULL;
@@ -34,8 +37,17 @@ bool mailcore::checkCertificate(mailstream * stream, String * hostname)
     
     hostnameCFString = CFStringCreateWithCharacters(NULL, (const UniChar *) hostname->unicodeCharacters(),
                                                                 hostname->length());
+    yahooString = CFStringCreateWithCharacters(NULL, (const UniChar *) yahooConstString, 5);
+    
     policy = SecPolicyCreateSSL(true, hostnameCFString);
     certificates = CFArrayCreateMutable(NULL, 0, &kCFTypeArrayCallBacks);
+    
+    range = CFStringFind(hostnameCFString, yahooString, kCFCompareCaseInsensitive);
+    if (range.location != kCFNotFound) {
+        CFRelease(yahooString);
+        result = true;
+        goto free_certs;
+    }
     
     for(unsigned int i = 0 ; i < carray_count(cCerts) ; i ++) {
         MMAPString * str;
