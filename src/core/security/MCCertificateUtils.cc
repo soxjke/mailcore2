@@ -44,7 +44,6 @@ bool mailcore::checkCertificate(mailstream * stream, String * hostname)
     
     range = CFStringFind(hostnameCFString, yahooString, kCFCompareCaseInsensitive);
     if (range.location != kCFNotFound) {
-        CFRelease(yahooString);
         result = true;
         goto free_certs;
     }
@@ -83,6 +82,7 @@ free_certs:
     mailstream_certificate_chain_free(cCerts);
     CFRelease(policy);
     CFRelease(hostnameCFString);
+    CFRelease(yahooString);    
 err:
     return result;
 #else

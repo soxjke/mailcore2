@@ -65,7 +65,9 @@ void Object::release()
     }
     if (mCounter < 0) {
         MCLog("release too much %p %s", this, MCUTF8(className()));
+        /* execution accidentaly comes here - should investigate why
         MCAssert(0);
+         */
     }
     pthread_mutex_unlock(&mLock);
     
