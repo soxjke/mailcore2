@@ -54,6 +54,8 @@ Object * Object::retain()
 
 void Object::release()
 {
+    if (mCounter == 0) return; // Later can be implemented NSZombie-like behaviour for debug purposes
+    
     bool shouldRelease = false;
     
     pthread_mutex_lock(&mLock);
