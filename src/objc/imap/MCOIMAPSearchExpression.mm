@@ -82,6 +82,11 @@
     return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchHeader([header mco_mcString], [value mco_mcString]));
 }
 
++ (MCOIMAPSearchExpression *) searchLarger:(uint32_t)value
+{
+    return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchLarger(value));
+}
+
 + (MCOIMAPSearchExpression *) searchAnd:(MCOIMAPSearchExpression *)expression other:(MCOIMAPSearchExpression *)other
 {
     mailcore::IMAPSearchExpression * result = mailcore::IMAPSearchExpression::searchAnd(expression->_nativeExpr, other->_nativeExpr);
@@ -118,6 +123,11 @@
 + (MCOIMAPSearchExpression *) searchHeader:(NSString *)header value:(NSString *)value shouldAvoidCharset:(BOOL)shouldAvoidCharset
 {
     return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchHeader([header mco_mcString], [value mco_mcString], shouldAvoidCharset));
+}
+
++ (MCOIMAPSearchExpression *) searchLarger:(uint32_t)value shouldAvoidCharset:(BOOL)shouldAvoidCharset
+{
+    return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchLarger(value, shouldAvoidCharset));
 }
 
 + (MCOIMAPSearchExpression *) searchAnd:(MCOIMAPSearchExpression *)expression other:(MCOIMAPSearchExpression *)other shouldAvoidCharset:(BOOL)shouldAvoidCharset

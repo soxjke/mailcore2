@@ -18,6 +18,7 @@ namespace mailcore {
 		virtual IMAPSearchKind kind();
 		virtual String * header();
 		virtual String * value();
+        virtual uint32_t larger();
         virtual bool shouldAvoidCharset();
 		virtual IMAPSearchExpression * leftExpression();
 		virtual IMAPSearchExpression * rightExpression();
@@ -27,6 +28,7 @@ namespace mailcore {
 		static IMAPSearchExpression * searchSubject(String * value);
 		static IMAPSearchExpression * searchContent(String * value);
 		static IMAPSearchExpression * searchHeader(String * header, String * value);
+        static IMAPSearchExpression * searchLarger(uint32_t value);
 		static IMAPSearchExpression * searchAnd(IMAPSearchExpression * left, IMAPSearchExpression * right);
 		static IMAPSearchExpression * searchOr(IMAPSearchExpression * left, IMAPSearchExpression * right);
         
@@ -36,6 +38,7 @@ namespace mailcore {
 		static IMAPSearchExpression * searchSubject(String * value, bool shouldAvoidCharset);
 		static IMAPSearchExpression * searchContent(String * value, bool shouldAvoidCharset);
 		static IMAPSearchExpression * searchHeader(String * header, String * value, bool shouldAvoidCharset);
+        static IMAPSearchExpression * searchLarger(uint32_t value, bool shouldAvoidCharset);
 		static IMAPSearchExpression * searchAnd(IMAPSearchExpression * left, IMAPSearchExpression * right, bool shouldAvoidCharset);
 		static IMAPSearchExpression * searchOr(IMAPSearchExpression * left, IMAPSearchExpression * right, bool shouldAvoidCharset);
         
@@ -49,6 +52,7 @@ namespace mailcore {
 		IMAPSearchKind mKind;
 		String * mHeader;
 		String * mValue;
+        uint32_t mLarger;
 		IMAPSearchExpression * mLeftExpression;
 		IMAPSearchExpression * mRightExpression;
 		void init();

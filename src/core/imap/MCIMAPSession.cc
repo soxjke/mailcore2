@@ -819,7 +819,6 @@ void IMAPSession::selectIfNeeded(String * folder, ErrorCode * pError)
         return;
     
     if (mState == STATE_SELECTED) {
-//        MCAssert(mCurrentFolder != NULL);
         if (mCurrentFolder == NULL || mCurrentFolder->caseInsensitiveCompare(folder) != 0) {
             select(folder, pError);
         }
@@ -2415,6 +2414,10 @@ static struct mailimap_search_key * searchKeyFromSearchExpression(IMAPSearchExpr
         case IMAPSearchKindHeader:
         {
             return mailimap_search_key_new_header(strdup(expression->header()->UTF8Characters()), strdup(expression->value()->UTF8Characters()));
+        }
+        case IMAPSearchKindLarger:
+        {
+            return mailimap_search_key_new_larger(expression->larger());
         }
         case IMAPSearchKindOr:
         {

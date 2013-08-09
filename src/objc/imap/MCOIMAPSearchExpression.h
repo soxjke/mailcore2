@@ -71,6 +71,8 @@
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchAnd:exprFrom other:exprSubject];
 **/
 
++ (MCOIMAPSearchExpression *) searchLarger:(uint32_t)value;
+
 + (MCOIMAPSearchExpression *) searchAnd:(MCOIMAPSearchExpression *)expression other:(MCOIMAPSearchExpression *)other;
 /**
  Creates a search expression that's a conjunction of two search expressions.
@@ -89,6 +91,7 @@
 + (MCOIMAPSearchExpression *) searchSubject:(NSString *)value shouldAvoidCharset:(BOOL)shouldAvoidCharset;
 + (MCOIMAPSearchExpression *) searchContent:(NSString *)value shouldAvoidCharset:(BOOL)shouldAvoidCharset;
 + (MCOIMAPSearchExpression *) searchHeader:(NSString *)header value:(NSString *)value shouldAvoidCharset:(BOOL)shouldAvoidCharset;
++ (MCOIMAPSearchExpression *) searchLarger:(uint32_t)value shouldAvoidCharset:(BOOL)shouldAvoidCharset;
 + (MCOIMAPSearchExpression *) searchAnd:(MCOIMAPSearchExpression *)expression other:(MCOIMAPSearchExpression *)other shouldAvoidCharset:(BOOL)shouldAvoidCharset;
 + (MCOIMAPSearchExpression *) searchOr:(MCOIMAPSearchExpression *)expression other:(MCOIMAPSearchExpression *)other shouldAvoidCharset:(BOOL)shouldAvoidCharset;
 

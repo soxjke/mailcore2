@@ -166,6 +166,7 @@ namespace mailcore {
         IMAPSearchKindSubject,
         IMAPSearchKindContent,
         IMAPSearchKindHeader,
+        IMAPSearchKindLarger,
         IMAPSearchKindOr,
         IMAPSearchKindAnd,
     };

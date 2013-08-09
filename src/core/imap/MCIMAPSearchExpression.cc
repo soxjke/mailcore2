@@ -26,6 +26,7 @@ IMAPSearchExpression::IMAPSearchExpression(IMAPSearchExpression * other)
 {
     init();
 	mKind = other->mKind;
+    mLarger = other->mLarger;
     mShouldAvoidCharset = other->mShouldAvoidCharset;
     MC_SAFE_REPLACE_COPY(String, mHeader, other->mHeader);
     MC_SAFE_REPLACE_COPY(String, mValue, other->mValue);
@@ -117,6 +118,14 @@ IMAPSearchExpression * IMAPSearchExpression::searchHeader(String * header, Strin
     return (IMAPSearchExpression *) expr->autorelease();
 }
 
+IMAPSearchExpression * IMAPSearchExpression::searchLarger(uint32_t value)
+{
+    IMAPSearchExpression * expr = new IMAPSearchExpression();
+    expr->mKind = IMAPSearchKindLarger;
+    expr->mLarger = value;
+    return (IMAPSearchExpression *) expr->autorelease();
+}
+
 IMAPSearchExpression * IMAPSearchExpression::searchAnd(IMAPSearchExpression * left, IMAPSearchExpression * right)
 {
     IMAPSearchExpression * expr = new IMAPSearchExpression();
@@ -178,6 +187,14 @@ IMAPSearchExpression * IMAPSearchExpression::searchHeader(String * header, Strin
     return (IMAPSearchExpression *) expr->autorelease();
 }
 
+IMAPSearchExpression * IMAPSearchExpression::searchLarger(uint32_t value, bool shouldAvoidCharset)
+{
+    IMAPSearchExpression * expr = new IMAPSearchExpression(shouldAvoidCharset);
+    expr->mKind = IMAPSearchKindLarger;
+    expr->mLarger = value;
+    return (IMAPSearchExpression *) expr->autorelease();
+}
+
 IMAPSearchExpression * IMAPSearchExpression::searchAnd(IMAPSearchExpression * left, IMAPSearchExpression * right, bool shouldAvoidCharset)
 {
     IMAPSearchExpression * expr = new IMAPSearchExpression(shouldAvoidCharset);
@@ -211,6 +228,11 @@ String * IMAPSearchExpression::value()
     return mValue;
 }
 
+uint32_t IMAPSearchExpression::larger()
+{
+    return mLarger;
+}
+
 bool IMAPSearchExpression::shouldAvoidCharset()
 {
     return mShouldAvoidCharset;
@@ -225,5 +247,3 @@ IMAPSearchExpression * IMAPSearchExpression::rightExpression()
 {
     return mRightExpression;
 }
-
-
