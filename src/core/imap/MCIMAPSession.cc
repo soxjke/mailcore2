@@ -819,8 +819,8 @@ void IMAPSession::selectIfNeeded(String * folder, ErrorCode * pError)
         return;
     
     if (mState == STATE_SELECTED) {
-        MCAssert(mCurrentFolder != NULL);
-        if (mCurrentFolder->caseInsensitiveCompare(folder) != 0) {
+//        MCAssert(mCurrentFolder != NULL);
+        if (mCurrentFolder == NULL || mCurrentFolder->caseInsensitiveCompare(folder) != 0) {
             select(folder, pError);
         }
     }
